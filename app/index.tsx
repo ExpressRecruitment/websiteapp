@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { Image, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { HomeOptionCard } from '@/components/HomeOptionCard';
@@ -11,8 +11,12 @@ export default function HomeScreen() {
       <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
 
       <View style={styles.hero}>
-        <View style={styles.logoWrap}>
-          <Text style={styles.logoText}>ER</Text>
+        <View style={styles.logoBadge}>
+          <Image
+            source={require('@/assets/brand/logo-mark.png')}
+            style={styles.logo}
+            resizeMode="contain"
+          />
         </View>
         <Text style={styles.heroTitle}>Express Recruitment</Text>
         <Text style={styles.heroSubtitle}>Great people. Great jobs. Great teams.</Text>
@@ -55,16 +59,20 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 28,
     borderBottomRightRadius: 28,
   },
-  logoWrap: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
+  logoBadge: {
+    width: 116,
+    height: 116,
+    borderRadius: 58,
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: spacing.md,
+    padding: 6,
   },
-  logoText: { fontFamily: fonts.bold, fontSize: fontSizes.xl, color: colors.primary },
+  logo: {
+    width: '100%',
+    height: '100%',
+  },
   heroTitle: {
     fontFamily: fonts.bold,
     fontSize: fontSizes.xxl,

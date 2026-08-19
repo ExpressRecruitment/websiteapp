@@ -98,8 +98,35 @@ the entry).
 
 - Teal `#008080`, red `#FF0000`, white, on Montserrat - see
   `constants/theme.ts`.
-- App icon/splash assets in `assets/images/` are Expo's defaults; swap
-  them for real Express Recruitment brand assets before release.
+- The roundel logo (`assets/brand/logo.svg`, rasterized into
+  `assets/brand/logo-mark.png` and the various `assets/images/icon*`,
+  `favicon.png`, `splash-icon.png`, `android-icon-*.png` files) is a
+  **hand-recreated vector approximation** of the supplied brand mark, not
+  the original design file - this sandbox had no way to save/import the
+  actual image asset that was shared in chat. It's close, but if a real
+  vector/PNG source becomes available, swap `assets/brand/logo.svg` for
+  it and re-derive the icon/splash/favicon variants (any SVG-to-PNG tool,
+  or the same "render at N×N, teal square backdrop for the app icon /
+  favicon, transparent + inset for the Android adaptive foreground"
+  approach used to generate the current ones).
+
+## Known limitation: live vacancy data
+
+The Jobs screen is fully wired to the WordPress REST API (see
+`lib/api/wordpress.ts`), but this sandbox's network egress is restricted
+to a short allowlist (npm, GitHub, a few others) - `express-recruitment.co.uk`
+is not reachable from here (confirmed via both `curl` and the fetch
+tooling, both blocked at the proxy level). That means vacancies could not
+actually be pulled/verified against the live site in this session; the
+Jobs screen will correctly show its error state until run somewhere with
+real network access. Once that's possible:
+
+- Running `npm start` from a machine/CI with normal internet access will
+  hit the real API - no code changes needed if the defaults in
+  `lib/config.ts` (jobs CPT + division taxonomy paths) turn out to be
+  correct for the live site.
+- If they need adjusting, or if you'd rather hand over a data export than
+  wait on network access, either works.
 
 ## Running locally
 

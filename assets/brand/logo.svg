@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!--
+    Express Recruitment roundel - hand-recreated in vector form (teal
+    #008080 / red #FF0000 / white) to match the supplied brand mark:
+    outer teal ring, white ring, "e" swash + "XPRESS" wordmark, a red
+    wave across the lower half, and "RECRUITMENT" set on a curved
+    baseline along the bottom rim.
+
+    This is a recreation, not the original design file - if a real
+    vector/logo file becomes available, swap it in here and regenerate
+    the rasterized assets (see scripts/generate-brand-assets, or just
+    re-render this file at the sizes listed in README > Brand).
+  -->
+  <defs>
+    <clipPath id="innerClip"><circle cx="100" cy="100" r="80"/></clipPath>
+    <path id="bottomArc" d="M 45.9,137.8 A 66,66 0 0 0 154.1,137.8" />
+  </defs>
+
+  <circle cx="100" cy="100" r="100" fill="#008080"/>
+  <circle cx="100" cy="100" r="90" fill="#ffffff"/>
+  <circle cx="100" cy="100" r="80" fill="#008080"/>
+
+  <g clip-path="url(#innerClip)">
+    <path d="M 15,125
+             C 55,160 90,158 115,140
+             C 145,118 155,85 185,55
+             L 185,210 L 15,210 Z" fill="#FF0000"/>
+
+    <path d="M 67.5,93.6 A 26,26 0 1 1 96.4,76.9"
+          fill="none" stroke="#ffffff" stroke-width="11" stroke-linecap="round"/>
+
+    <text x="100" y="106" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="20" fill="#ffffff">XPRESS</text>
+
+    <text font-family="Montserrat, Arial, sans-serif" font-weight="700" font-size="14" fill="#ffffff" letter-spacing="1">
+      <textPath xlink:href="#bottomArc" href="#bottomArc" startOffset="50%" text-anchor="middle">RECRUITMENT</textPath>
+    </text>
+  </g>
+</svg>
