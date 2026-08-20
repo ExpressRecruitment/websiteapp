@@ -110,23 +110,37 @@ the entry).
   favicon, transparent + inset for the Android adaptive foreground"
   approach used to generate the current ones).
 
-## Known limitation: live vacancy data
+## Jobs data source
 
-The Jobs screen is fully wired to the WordPress REST API (see
-`lib/api/wordpress.ts`), but this sandbox's network egress is restricted
-to a short allowlist (npm, GitHub, a few others) - `express-recruitment.co.uk`
-is not reachable from here (confirmed via both `curl` and the fetch
-tooling, both blocked at the proxy level). That means vacancies could not
-actually be pulled/verified against the live site in this session; the
-Jobs screen will correctly show its error state until run somewhere with
-real network access. Once that's possible:
+This sandbox's network egress is restricted to a short allowlist (npm,
+GitHub, a few others) - `express-recruitment.co.uk` is not reachable from
+here (confirmed via both `curl` and the fetch tooling, both blocked at
+the proxy level), so the WordPress API couldn't be pulled from live.
+Instead, the Jobs screen currently reads from a **bundled snapshot**
+(`data/jobs.json`) generated from a real export of the site's live
+vacancies (135 roles, dated 2026-08-14). A few things worth knowing about
+that snapshot:
 
-- Running `npm start` from a machine/CI with normal internet access will
-  hit the real API - no code changes needed if the defaults in
-  `lib/config.ts` (jobs CPT + division taxonomy paths) turn out to be
-  correct for the live site.
-- If they need adjusting, or if you'd rather hand over a data export than
-  wait on network access, either works.
+- Title, location, salary, and job type are exactly as scraped from the
+  site - nothing invented. Full job **descriptions** weren't in the
+  export, so the description shown is just those same facts restated
+  plus a line pointing back to the website; it is not the real listing
+  copy.
+- The export didn't include each job's **division** - divisions are
+  inferred from the title by keyword against Express Recruitment's real
+  division list (Temporary, Sales, Professional & Corporate Support,
+  Legal & Finance, Not-For-Profit, Tech & IT, Engineering, Executive &
+  Managerial Search, The Academy), so a few roles may be mis-categorized.
+- It's a point-in-time snapshot, not a live feed - it will go stale.
+
+The WordPress REST client (`lib/api/wordpress.ts`) is unchanged and still
+fully wired up. Switching from the snapshot to live data is one line:
+set `EXPO_PUBLIC_JOBS_SOURCE=wordpress` (see `.env.example`) once this
+runs somewhere with real network access to the site - `lib/api/jobs.ts`
+is the facade both screens and hooks import from, so nothing else needs
+to change. Re-generating `data/jobs.json` from a newer export is just a
+matter of re-running the same parse-and-classify approach against a
+fresh copy of the spreadsheet.
 
 ## Running locally
 

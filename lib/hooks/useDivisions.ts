@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { fetchDivisions } from '@/lib/api/wordpress';
+import { fetchDivisions } from '@/lib/api/jobs';
 import type { Division } from '@/types/job';
 
 export function useDivisions() {

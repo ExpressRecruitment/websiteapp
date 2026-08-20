@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { ApiError, fetchJobs } from '@/lib/api/wordpress';
+import { ApiError, fetchJobs } from '@/lib/api/jobs';
 import type { Job } from '@/types/job';
 
 interface UseJobsParams {

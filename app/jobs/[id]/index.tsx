@@ -7,7 +7,7 @@ import { Button } from '@/components/Button';
 import { Screen } from '@/components/Screen';
 import { ErrorState, LoadingState } from '@/components/StateView';
 import { colors, fonts, fontSizes, radii, spacing } from '@/constants/theme';
-import { ApiError, fetchJobById } from '@/lib/api/wordpress';
+import { ApiError, fetchJobById } from '@/lib/api/jobs';
 import type { Job } from '@/types/job';
 
 export default function JobDetailScreen() {

@@ -29,6 +29,19 @@ function envOrDefault(key: string, fallback: string): string {
   return value && value.length > 0 ? value : fallback;
 }
 
+/**
+ * Which jobs data source the app reads from:
+ *  - 'local': a bundled snapshot (`data/jobs.json`) taken 2026-08-14.
+ *    This is the default for now, since this environment can't reach
+ *    the live WordPress API (see README > Known limitation).
+ *  - 'wordpress': fetch live from WP_API_BASE_URL + JOBS_ENDPOINT_PATH.
+ * Switch with EXPO_PUBLIC_JOBS_SOURCE once live access is available -
+ * no other code needs to change (see lib/api/jobs.ts).
+ */
+export const JOBS_SOURCE = envOrDefault('EXPO_PUBLIC_JOBS_SOURCE', 'local') as
+  | 'local'
+  | 'wordpress';
+
 /** Base URL of the WordPress site, no trailing slash. */
 export const WP_BASE_URL = envOrDefault(
   'EXPO_PUBLIC_WP_BASE_URL',

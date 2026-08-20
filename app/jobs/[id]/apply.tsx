@@ -10,7 +10,7 @@ import { TextField } from '@/components/TextField';
 import { colors, fonts, fontSizes, spacing } from '@/constants/theme';
 import { ApiError, submitFormidableForm, type PickedFile } from '@/lib/api/formidable';
 import { APPLICATIONS_EMAIL, FORMIDABLE_FORMS } from '@/lib/config';
-import { fetchJobById } from '@/lib/api/wordpress';
+import { fetchJobById } from '@/lib/api/jobs';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
